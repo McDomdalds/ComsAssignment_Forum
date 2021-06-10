@@ -9,12 +9,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import okhttp3.*;
 
 public class PostQuestionActivity extends AppCompatActivity {
     phpRequest req = new phpRequest();
-    OkHttpClient client = new OkHttpClient();
-    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,7 @@ public class PostQuestionActivity extends AppCompatActivity {
             @Override
             public void processResponse(String response) {
                 title.setText("");
-                question.setText(response);
+                question.setText("");
                 Toast.makeText(PostQuestionActivity.this, response, Toast.LENGTH_LONG).show();
             }
         });
