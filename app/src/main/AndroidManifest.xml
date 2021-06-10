@@ -12,6 +12,7 @@
         android:theme="@style/Theme.ComsAssignment_Forum2">
         <activity android:name=".ListQuestionsActivity"></activity>
         <activity android:name=".PostQuestionActivity" />
+        <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

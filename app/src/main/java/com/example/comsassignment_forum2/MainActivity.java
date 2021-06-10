@@ -1,9 +1,11 @@
 package com.example.comsassignment_forum2;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,18 +16,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-    public void postQuestion(View v){
-        EditText user_id = findViewById(R.id.userIDEnter);
-        Intent i = new Intent(MainActivity.this, PostQuestionActivity.class);
-        i.putExtra("user_id", user_id.getText());
-        startActivity(i);
+    phpRequest req = new phpRequest();
+    public void login(View v) {
+        ContentValues cv = new ContentValues();
+        EditText uName = (EditText)(findViewById(R.id.editTextUName));
+        EditText pWord = (EditText)(findViewById(R.id.editTextPWord));
+        cv.put("username",uName.getText().toString());
+        cv.put("password",pWord.getText().toString());
+        req.doRequest(this, "login.php",cv, new RequestHandler() {
+            @Override
+            public void processResponse(String response) {
+                processJSON(response);
+            }
+        });
+    }
+    public void register(View v) {
+        ContentValues cv = new ContentValues();
+        EditText uName = (EditText)(findViewById(R.id.editTextUName));
+        EditText pWord = (EditText)(findViewById(R.id.editTextPWord));
+        cv.put("username",uName.getText().toString());
+        cv.put("password",pWord.getText().toString());
+        //check username and password
+        req.doRequest(this, "register.php",cv, new RequestHandler() {
+            @Override
+            public void processResponse(String response) {
+                processJSON(response);
+            }
+        });
     }
 
-    public void listQuestions(View v){
-        EditText user_id = findViewById(R.id.userIDEnter);
-        Intent i = new Intent(MainActivity.this, ListQuestionsActivity.class);
-        i.putExtra("user_id", user_id.getText());
-        startActivity(i);
+    public void processJSON(String json) {
+        TextView t = (TextView)(findViewById(R.id.txtDisplay));
+        t.setText(json);
     }
 }
