@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
+// Use for requests
 public class phpRequest {
 
     OkHttpClient client = new OkHttpClient();
